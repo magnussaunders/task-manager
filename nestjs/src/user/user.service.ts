@@ -19,12 +19,7 @@ export class UserService {
     }
 
     async createUser(user: User): Promise<User> {
-        let userToCreate = new User()
-        userToCreate.userLastName = user.userLastName
-        userToCreate.userFirstName = user.userFirstName
-        userToCreate.userName = user.userName
-        userToCreate.passwordHash = user.passwordHash
-        return this.usersRepository.manager.save(userToCreate)
+        return this.usersRepository.save(user)
     }
 
     async updateUser(user: User): Promise<User> {
