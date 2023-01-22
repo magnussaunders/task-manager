@@ -21,7 +21,10 @@ jobs:
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
       - run: npm ci
+        working-directory: nestjs
+      
       - run: npm run lint
+        working-directory: nestjs
 
   Unit-Test:
     runs-on: ubuntu-latest
