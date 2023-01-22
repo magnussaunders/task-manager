@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - master
+    paths:
+      - nestjs
 
 jobs:
   build-and-push-docker-image-to-dockerhub:
@@ -27,6 +29,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./nestjs/
-          file: ./nestjs/Dockerfile.nestjs
+          file: ./nestjs/Dockerfile.NestJS
           push: true
           tags: magnussaunders/demo-api:nestjs
