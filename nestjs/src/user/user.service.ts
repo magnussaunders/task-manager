@@ -21,7 +21,7 @@ export class UserService {
     }
 
     async createUser(user: User): Promise<User> {
-        IdGenerator.generateId(Factory.User)
+        user.oid = IdGenerator.generateId(Factory.User)
         return this.userRepository.save(user)
     }
 
