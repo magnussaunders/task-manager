@@ -17,6 +17,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 16.16.0
+          cache-dependency-path: ./nestjs/package-lock.json
 
       - name: Install Dependencies
         run: npm ci
@@ -34,6 +35,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 16.16.0
+          cache-dependency-path: ./nestjs/package-lock.json
 
       - name: Install Dependencies
         run: npm ci
