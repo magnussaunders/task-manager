@@ -6,6 +6,7 @@ import { BoardModule } from './board/board.module';
 import {Board} from "./board/board.entity";
 import { UserModule } from './user/user.module';
 import {User} from "./user/user.entity";
+import { ConfigurationItemService } from './configuration-item/configuration-item.service';
 
 @Module({
   imports: [
@@ -23,6 +24,6 @@ import {User} from "./user/user.entity";
     UserModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, ConfigurationItemService],
 })
 export class AppModule {}
