@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v2
         with:
-          node-version: ${{secrets.NODE_VERSION}}
+          node-version: 16.16.0
 
       - name: Install Dependencies
         run: npm ci
@@ -33,7 +33,7 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v2
         with:
-          node-version: ${{secrets.NODE_VERSION}}
+          node-version: 16.16.0
 
       - name: Install Dependencies
         run: npm ci
