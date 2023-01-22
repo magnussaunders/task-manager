@@ -17,4 +17,17 @@ export class BoardService {
     findById(boardId: string): Promise<Board> {
         return this.boardRepository.findOneBy({ bid: boardId })
     }
+
+    create(board: Board): Promise<Board> {
+        return this.boardRepository.save(board)
+    }
+
+    update(board: Board): Promise<Board> {
+        return this.boardRepository.save(board)
+    }
+
+    async delete(boardId: string): Promise<void> {
+        await this.boardRepository.delete({bid: boardId})
+        return
+    }
 }

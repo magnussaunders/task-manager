@@ -8,6 +8,9 @@ export class Board {
     _id: string
 
     @Column()
+    bid: string
+
+    @Column()
     name: string
 
     @Column()
