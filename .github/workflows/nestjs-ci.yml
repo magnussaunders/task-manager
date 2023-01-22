@@ -3,50 +3,49 @@ on:
   pull_request:
     branches:
       - master
-    paths:
-      - 'nestjs/**'
 
 jobs:
-  Linting-Test:
+  Lint-Testa:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: 'nestjs'
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js 16.16.0
-        uses: actions/setup-node@v2
-        with:
-          node-version: 16.16.0
-          cache: 'npm'
-          cache-dependency-path: '**/package-lock.json'
-      - run: npm install
-        working-directory: nestjs
-      
-      - run: npm run lint
-        working-directory: nestjs
-
-  Unit-Test:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: 'nestjs'
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      - name: Setup Node.js environment
+      - name: Initialize Node
         uses: actions/setup-node@v2
         with:
           node-version: 16.16.0
-          cache: 'npm'
-          cache-dependency-path: '**/package-lock.json'
+          cache: npm
+          cache-dependency-path: ./nestjs/package-lock.json
 
       - name: Install Dependencies
         working-directory: nestjs
-        run: npm ci
+        run: npm install
 
-      - name: Run Unit Tests
+
+      - name: Run linting test
+        working-directory: nestjs
+        run: npm run lint
+        
+  Unit-Tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Initialize Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.16.0
+          cache: npm
+          cache-dependency-path: ./nestjs/package-lock.json
+
+      - name: Install Dependencies
+        working-directory: nestjs
+        run: npm install
+
+
+      - name: Run linting test
         working-directory: nestjs
         run: npm run test
 
