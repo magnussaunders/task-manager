@@ -3,9 +3,11 @@ on:
   pull_request:
     branches:
       - master
+    paths:
+      - nestjs
 
 jobs:
-  Lint-Testa:
+  lint-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -26,28 +28,24 @@ jobs:
       - name: Run linting test
         working-directory: nestjs
         run: npm run lint
-        
-  Unit-Tests:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
 
-      - name: Initialize Node
-        uses: actions/setup-node@v2
-        with:
-          node-version: 16.16.0
-          cache: npm
-          cache-dependency-path: ./nestjs/package-lock.json
+  unit-tests:
+     runs-on: ubuntu-latest
+     steps:
+       - name: Checkout repo
+         uses: actions/checkout@v2
 
-      - name: Install Dependencies
-        working-directory: nestjs
-        run: npm install
+       - name: Initialize Node
+         uses: actions/setup-node@v2
+         with:
+           node-version: 16.16.0
+           cache: npm
+           cache-dependency-path: ./nestjs/package-lock.json
 
+       - name: Install Dependencies
+         working-directory: nestjs
+         run: npm install
 
-      - name: Run linting test
-        working-directory: nestjs
-        run: npm run test
-
-
-
+       - name: Run unit tests
+         working-directory: nestjs
+         run: npm run test
