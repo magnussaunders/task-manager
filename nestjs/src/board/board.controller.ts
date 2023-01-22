@@ -4,7 +4,9 @@ import {Board} from "./board.entity";
 
 @Controller('board')
 export class BoardController {
-    constructor(private boardService: BoardService) {}
+    constructor(
+        private boardService: BoardService
+    ) {}
 
     @Get()
     getAllBoards(): Promise<Board[]> {
