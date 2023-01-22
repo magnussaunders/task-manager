@@ -4,7 +4,7 @@ on:
     branches:
       - master
     paths:
-      - nestjs
+      - ./nestjs
 
 jobs:
   Linting Test:
