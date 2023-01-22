@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import {TypeOrmModule} from "@nestjs/typeorm";
 import { BoardModule } from './board/board.module';
+import {Board} from "./board/board.entity";
 
 @Module({
   imports: [
@@ -13,7 +14,7 @@ import { BoardModule } from './board/board.module';
       username: 'admin',
       password: 'thisisAdmin123',
       database: 'demo-api-db',
-      entities: [],
+      entities: [Board, ],
       synchronize: true,
     }),
     BoardModule
