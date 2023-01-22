@@ -1,5 +1,5 @@
 export interface ConfigOption {
-    id: string
+    oid: string
     name: string
     color: string
 }
