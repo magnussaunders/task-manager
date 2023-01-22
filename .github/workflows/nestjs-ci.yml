@@ -20,9 +20,11 @@ jobs:
           cache-dependency-path: ./nestjs/package-lock.json
 
       - name: Install Dependencies
+        working-directory: nestjs
         run: npm ci
 
       - name: Run Lint Tests
+        working-directory: nestjs
         run: npm run lint
 
   Unit-Test:
@@ -38,9 +40,11 @@ jobs:
           cache-dependency-path: ./nestjs/package-lock.json
 
       - name: Install Dependencies
+        working-directory: nestjs
         run: npm ci
 
       - name: Run Unit Tests
+        working-directory: nestjs
         run: npm run test
 
 
