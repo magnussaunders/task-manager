@@ -9,6 +9,9 @@ on:
 jobs:
   Linting-Test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 'nestjs'
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -17,7 +20,8 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 16.16.0
-          cache-dependency-path: ./nestjs/package-lock.json
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
 
       - name: Install Dependencies
         working-directory: nestjs
@@ -29,6 +33,9 @@ jobs:
 
   Unit-Test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 'nestjs'
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -37,7 +44,8 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 16.16.0
-          cache-dependency-path: ./nestjs/package-lock.json
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
 
       - name: Install Dependencies
         working-directory: nestjs
