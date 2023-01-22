@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import {TypeOrmModule} from "@nestjs/typeorm";
+import { BoardModule } from './board/board.module';
 
 @Module({
   imports: [
@@ -14,7 +15,8 @@ import {TypeOrmModule} from "@nestjs/typeorm";
       database: 'demo-api-db',
       entities: [],
       synchronize: true,
-    })
+    }),
+    BoardModule
   ],
   controllers: [AppController],
   providers: [AppService],
