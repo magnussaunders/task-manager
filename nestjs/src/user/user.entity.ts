@@ -1,10 +1,8 @@
-import {Entity, Column, ObjectIdColumn} from 'typeorm'
+import {Entity, Column} from 'typeorm'
+import {ConfigurationItem} from "../configuration-item/configuration-item.entity";
 
 @Entity()
-export class User {
-    @ObjectIdColumn()
-    _id: string
-
+export class User extends ConfigurationItem {
     @Column()
     userFirstName: string
 
