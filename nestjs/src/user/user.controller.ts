@@ -15,10 +15,10 @@ export class UserController {
         }
     }
 
-    @Get(':username')
+    @Get(':userId')
     async getUserById(@Param() params): Promise<User> {
         try {
-            return await this.userService.getUserByUsername(params.username)
+            return await this.userService.getUserById(params.userId)
         } catch (error) {
             return error
         }
