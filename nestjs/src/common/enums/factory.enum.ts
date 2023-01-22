@@ -1,4 +1,4 @@
-export enum ConfigurationItemType{
+export enum Factory{
     User = 'usr',
     Board = 'brd',
     Task = 'tsk',

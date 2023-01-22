@@ -1,10 +1,15 @@
-import {Column, Entity} from "typeorm";
+import {Column, Entity, ObjectID, ObjectIdColumn} from "typeorm";
 import {Member} from "./interfaces/member.interface";
 import {ConfigOption} from "./interfaces/config-option.interface";
-import {ConfigurationItem} from "../configuration-item/configuration-item.entity";
 
 @Entity()
-export class Board extends ConfigurationItem {
+export class Board {
+    @ObjectIdColumn()
+    _id: ObjectID
+
+    @Column()
+    oid: string
+
     @Column()
     name: string
 

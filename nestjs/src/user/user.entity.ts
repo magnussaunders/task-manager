@@ -1,8 +1,13 @@
-import {Entity, Column} from 'typeorm'
-import {ConfigurationItem} from "../configuration-item/configuration-item.entity";
+import {Entity, Column, ObjectIdColumn, ObjectID} from 'typeorm'
 
 @Entity()
-export class User extends ConfigurationItem {
+export class User {
+    @ObjectIdColumn()
+    _id: ObjectID
+
+    @Column()
+    oid: string
+
     @Column()
     userFirstName: string
 

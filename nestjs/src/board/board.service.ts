@@ -2,15 +2,14 @@ import {Injectable} from '@nestjs/common';
 import {InjectRepository} from "@nestjs/typeorm";
 import {Repository} from "typeorm";
 import {Board} from "./board.entity";
-import {ConfigurationItemType} from "../configuration-item/enums/configuration-item-type.enum";
-import {ConfigurationItemService} from "../configuration-item/configuration-item.service";
+import {Factory} from "../common/enums/factory.enum";
+import {IdGenerator} from "../common/classes/id-generator.class";
 
 @Injectable()
 export class BoardService {
     constructor(
         @InjectRepository(Board)
-        private boardRepository: Repository<Board>,
-        private configurationItemService: ConfigurationItemService
+        private boardRepository: Repository<Board>
     ) {}
 
     findAll(): Promise<Board[]> {
@@ -22,7 +21,7 @@ export class BoardService {
     }
 
     async create(board: Board): Promise<Board> {
-        board.oid = await this.configurationItemService.generateId(ConfigurationItemType.Board)
+        board.oid = IdGenerator.generateId(Factory.Board)
         return this.boardRepository.save(board)
     }
 
