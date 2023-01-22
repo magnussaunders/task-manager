@@ -13,23 +13,20 @@ jobs:
       run:
         working-directory: 'nestjs'
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
-
-      - name: Setup Node.js environment
+      - uses: actions/checkout@v2
+      - name: Use Node.js 16.16.0
         uses: actions/setup-node@v2
         with:
           node-version: 16.16.0
-          cache: 'npm'
-          cache-dependency-path: '**/package-lock.json'
-
-      - name: Install Dependencies
-        working-directory: nestjs
-        run: npm ci
-
-      - name: Run Lint Tests
-        working-directory: nestjs
-        run: npm run lint
+      - name : Cache
+        uses: actions/cache@v2
+        with:
+          path: "nestjs/node_modules"
+          key: node-modules-${{ hashFiles('nestjs/package.json') }}
+      - run: npm ci
+        working-directory: ./nestjs
+      - run: npm run lint
+        working-directory: ./nestjs
 
   Unit-Test:
     runs-on: ubuntu-latest
