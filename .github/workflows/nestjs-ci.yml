@@ -1,13 +1,13 @@
 name: NestJS Continuous Integration
 on:
-  push:
+  pull_request:
     branches:
       - master
     paths:
       - 'nestjs/**'
 
 jobs:
-  Linting Test:
+  Linting-Test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -24,7 +24,7 @@ jobs:
       - name: Run Lint Tests
         run: npm run lint
 
-  Unit Test:
+  Unit-Test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
