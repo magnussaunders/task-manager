@@ -9,4 +9,30 @@ export class UserService {
         @InjectRepository(User)
         private usersRepository: Repository<User>
     ) {}
+
+    getAllUsers(): Promise<User[]> {
+        return this.usersRepository.find()
+    }
+
+    getUserByUsername(username: string): Promise<User> {
+        return this.usersRepository.findOneBy({userName: username})
+    }
+
+    async createUser(user: User): Promise<User> {
+        let userToCreate = new User()
+        userToCreate.userLastName = user.userLastName
+        userToCreate.userFirstName = user.userFirstName
+        userToCreate.userName = user.userName
+        userToCreate.passwordHash = user.passwordHash
+        return this.usersRepository.manager.save(userToCreate)
+    }
+
+    async updateUser(user: User): Promise<User> {
+        return this.usersRepository.save(user)
+    }
+
+    async deleteUser(user: User): Promise<void> {
+        await this.usersRepository.delete({userName: user.userName})
+        return
+    }
 }
