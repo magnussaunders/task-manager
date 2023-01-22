@@ -1,14 +1,14 @@
-import {Column, Entity, ObjectIdColumn} from "typeorm";
+import {Column, Entity, ObjectID, ObjectIdColumn} from "typeorm";
 import {Member} from "./interfaces/member.interface";
 import {ConfigOption} from "./interfaces/config-option.interface";
 
 @Entity()
 export class Board {
     @ObjectIdColumn()
-    _id: string
+    _id: ObjectID
 
     @Column()
-    bid: string
+    oid: string
 
     @Column()
     name: string
