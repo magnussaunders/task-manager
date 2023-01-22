@@ -20,7 +20,7 @@ jobs:
           node-version: 16.16.0
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
-      - run: npm ci
+      - run: npm install
         working-directory: nestjs
       
       - run: npm run lint
