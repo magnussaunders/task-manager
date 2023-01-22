@@ -26,8 +26,8 @@ export class BoardService {
         return this.boardRepository.save(board)
     }
 
-    async delete(boardId: string): Promise<void> {
-        await this.boardRepository.delete({bid: boardId})
+    async delete(board: Board): Promise<void> {
+        await this.boardRepository.delete({bid: board.bid})
         return
     }
 }
