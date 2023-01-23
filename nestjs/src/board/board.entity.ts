@@ -1,5 +1,4 @@
 import {Column, Entity, ObjectID, ObjectIdColumn} from "typeorm";
-import {Member} from "./interfaces/member.interface";
 import {ConfigOption} from "./interfaces/config-option.interface";
 
 @Entity()
@@ -12,9 +11,6 @@ export class Board {
 
     @Column()
     name: string
-
-    @Column()
-    members: Member[]
 
     @Column()
     statuses: ConfigOption[]

@@ -6,5 +6,6 @@ export enum Factory{
     Category = 'cat',
     Status = 'sts',
     Priority = 'pri',
-    Activity = 'act'
+    Activity = 'act',
+    Entitlement = 'ent'
 }

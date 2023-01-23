@@ -1,6 +1,7 @@
 import {Body, Controller, Delete, Get, Param, Patch, Put} from '@nestjs/common';
 import {UserService} from "./user.service";
 import {User} from "./user.entity";
+import {Entitlement} from "./interfaces/entitlement.interface";
 
 @Controller('user')
 export class UserController {
@@ -22,6 +23,11 @@ export class UserController {
         } catch (error) {
             return error
         }
+    }
+
+    @Get(':userId/board-list')
+    async getBoardListForUser(@Param() params): Promise<Entitlement[]> {
+        return this.userService.getBoardListForUser(params.userId)
     }
 
     @Put()

@@ -8,6 +8,7 @@ import { BoardController } from './board.controller';
 @Module({
     imports: [TypeOrmModule.forFeature([Board])],
     providers: [BoardService],
-    controllers: [BoardController]
+    controllers: [BoardController],
+    exports: [BoardService]
 })
 export class BoardModule {}

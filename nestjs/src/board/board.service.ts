@@ -5,6 +5,7 @@ import {Board} from "./board.entity";
 import {Factory} from "../common/enums/factory.enum";
 import {IdGenerator} from "../common/classes/id-generator.class";
 import {ConfigOption} from "./interfaces/config-option.interface";
+import {Entitlement} from "../user/interfaces/entitlement.interface";
 
 @Injectable()
 export class BoardService {
@@ -19,6 +20,14 @@ export class BoardService {
 
     findById(boardId: string): Promise<Board> {
         return this.boardRepository.findOneBy({ oid: boardId })
+    }
+
+    async addNameToEntitlements(entitlements: Entitlement[]): Promise<Entitlement[]> {
+        for (let entitlement of entitlements) {
+            let board = await this.findById(entitlement.bid)
+            entitlement.boardName = board.name
+        }
+        return entitlements
     }
 
     async create(board: Board): Promise<Board> {

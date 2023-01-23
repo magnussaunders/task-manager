@@ -4,12 +4,15 @@ import {User} from "./user.entity";
 import {Repository} from "typeorm";
 import {Factory} from "../common/enums/factory.enum";
 import {IdGenerator} from "../common/classes/id-generator.class";
+import {Entitlement} from "./interfaces/entitlement.interface";
+import {BoardService} from "../board/board.service";
 
 @Injectable()
 export class UserService {
     constructor(
         @InjectRepository(User)
-        private userRepository: Repository<User>
+        private userRepository: Repository<User>,
+        private boardService: BoardService
     ) {}
 
     getAllUsers(): Promise<User[]> {
@@ -18,6 +21,11 @@ export class UserService {
 
     getUserById(userId: string): Promise<User> {
         return this.userRepository.findOneBy({oid: userId})
+    }
+
+    async getBoardListForUser(userId: string): Promise<Entitlement[]> {
+        let user = await this.getUserById(userId)
+        return await this.boardService.addNameToEntitlements(user.entitlements)
     }
 
     async createUser(user: User): Promise<User> {
