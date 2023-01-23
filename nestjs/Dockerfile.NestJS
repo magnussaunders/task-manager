@@ -10,6 +10,12 @@ COPY . .
 
 RUN npm run build
 
+ENV DB_HOST = localhost
+ENV DB_PORT = 27017
+ENV DB_DB = demo-api-db
+ENV DB_USERNAME = nestjs
+ENV DB_PASSWORD = thisisNest123
+
 CMD [ "node", "dist/main.js" ]
 
 EXPOSE 3000
