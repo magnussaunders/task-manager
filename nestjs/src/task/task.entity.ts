@@ -1,5 +1,4 @@
 import {Column, Entity, ObjectID, ObjectIdColumn} from "typeorm";
-import {User} from "../user/user.entity";
 import {Activity} from "./interfaces/activity.interface";
 
 @Entity()
@@ -29,7 +28,7 @@ export class Task {
     dueDate: Date
 
     @Column()
-    assignees: User[]
+    assignees: string[]
 
     @Column()
     category: string

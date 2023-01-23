@@ -1,4 +1,5 @@
 import {Entity, Column, ObjectIdColumn, ObjectID} from 'typeorm'
+import {Entitlement} from "./interfaces/entitlement.interface";
 
 @Entity()
 export class User {
@@ -19,4 +20,7 @@ export class User {
 
     @Column()
     passwordHash: string
+
+    @Column()
+    entitlements: Entitlement[]
 }
