@@ -4,7 +4,7 @@ on:
     branches:
       - master
     paths:
-      - 'nestjs/**'
+      - 'api/**'
 
 jobs:
   lint-tests:
@@ -18,15 +18,15 @@ jobs:
         with:
           node-version: 16.16.0
           cache: npm
-          cache-dependency-path: ./nestjs/package-lock.json
+          cache-dependency-path: ./api/package-lock.json
 
       - name: Install Dependencies
-        working-directory: nestjs
+        working-directory: api
         run: npm install
 
 
       - name: Run linting test
-        working-directory: nestjs
+        working-directory: api
         run: npm run lint
 
 #   unit-tests:
@@ -40,12 +40,12 @@ jobs:
 #          with:
 #            node-version: 16.16.0
 #            cache: npm
-#            cache-dependency-path: ./nestjs/package-lock.json
+#            cache-dependency-path: ./api/package-lock.json
 
 #        - name: Install Dependencies
-#          working-directory: nestjs
+#          working-directory: api
 #          run: npm install
 
 #        - name: Run unit tests
-#          working-directory: nestjs
+#          working-directory: api
 #          run: npm run test
