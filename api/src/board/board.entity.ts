@@ -13,6 +13,12 @@ export class Board {
     name: string
 
     @Column()
+    owners: string[]
+
+    @Column()
+    members: string[]
+
+    @Column()
     statuses: ConfigOption[]
 
     @Column()

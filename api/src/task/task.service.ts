@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import {InjectRepository} from "@nestjs/typeorm";
 import {Task} from "./task.entity";
-import {Repository} from "typeorm";
+import {ArrayContains, Repository} from "typeorm";
 import {IdGenerator} from "../common/classes/id-generator.class";
 import {Factory} from "../common/enums/factory.enum";
 
@@ -18,6 +18,10 @@ export class TaskService {
 
     findById(taskId: string): Promise<Task> {
         return this.taskRepository.findOneBy({ oid: taskId })
+    }
+
+    getTasksForUser(userId: string): Promise<Task[]> {
+        return this.taskRepository.findBy({assignees: ArrayContains([userId])})
     }
 
     async create(task: Task): Promise<Task> {

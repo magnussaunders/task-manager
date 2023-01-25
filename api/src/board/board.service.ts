@@ -1,6 +1,6 @@
 import {Injectable} from '@nestjs/common';
 import {InjectRepository} from "@nestjs/typeorm";
-import {Repository} from "typeorm";
+import {ArrayContains, Repository} from "typeorm";
 import {Board} from "./board.entity";
 import {Factory} from "../common/enums/factory.enum";
 import {IdGenerator} from "../common/classes/id-generator.class";
@@ -20,6 +20,12 @@ export class BoardService {
 
     findById(boardId: string): Promise<Board> {
         return this.boardRepository.findOneBy({ oid: boardId })
+    }
+
+    async getBoardsForUser(userId: string): Promise<Board[]> {
+        let boards = await this.boardRepository.findBy({ members: ArrayContains([userId]) })
+        boards.concat(await this.boardRepository.findBy({ owners: ArrayContains([userId]) }))
+        return boards
     }
 
     async addNameToEntitlements(entitlements: Entitlement[]): Promise<Entitlement[]> {

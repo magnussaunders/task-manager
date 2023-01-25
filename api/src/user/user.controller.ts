@@ -1,12 +1,18 @@
 import {Body, Controller, Delete, Get, Param, Patch, Put} from '@nestjs/common';
 import {UserService} from "./user.service";
 import {User} from "./user.entity";
-import {Entitlement} from "./interfaces/entitlement.interface";
 import {Task} from "../task/task.entity";
+import {BoardService} from "../board/board.service";
+import {Board} from "../board/board.entity";
+import {TaskService} from "../task/task.service";
 
 @Controller('user')
 export class UserController {
-    constructor(private userService: UserService) { }
+    constructor(
+        private userService: UserService,
+        private boardService: BoardService,
+        private taskService: TaskService
+    ) { }
 
     @Get()
     getAllUsers() {
@@ -26,14 +32,14 @@ export class UserController {
         }
     }
 
-    @Get(':userId/board-list')
-    async getBoardListForUser(@Param() params): Promise<Entitlement[]> {
-        return this.userService.getBoardListForUser(params.userId)
+    @Get(':userId/boards')
+    async getBoardListForUser(@Param() params): Promise<Board[]> {
+        return this.boardService.getBoardsForUser(params.userId)
     }
 
     @Get(':userId/tasks')
     async getTasksForUser(@Param() params): Promise<Task[]> {
-        return this.userService.getTasksForUser(params.userId)
+        return this.taskService.getTasksForUser(params.userId)
     }
 
     @Put()
