@@ -11,7 +11,7 @@ export class UserController {
     @Get()
     getAllUsers() {
         try {
-            return this.userService.getAllUsers()
+            return this.userService.findAll()
         } catch (error) {
             return error
         }
@@ -20,7 +20,7 @@ export class UserController {
     @Get(':userId')
     async getUserById(@Param() params): Promise<User> {
         try {
-            return await this.userService.getUserById(params.userId)
+            return await this.userService.findById(params.userId)
         } catch (error) {
             return error
         }
@@ -39,7 +39,7 @@ export class UserController {
     @Put()
     createUser(@Body() user: User): Promise<User> {
         try {
-            return this.userService.createUser(user)
+            return this.userService.create(user)
         } catch (error) {
             return error
         }
@@ -48,7 +48,7 @@ export class UserController {
     @Patch()
     updateUser(@Body() user): Promise<User> {
         try {
-            return this.userService.updateUser(user)
+            return this.userService.update(user)
         } catch (error) {
             return error
         }
@@ -57,7 +57,7 @@ export class UserController {
     @Delete()
     deleteUser(@Body() user): Promise<void> {
         try {
-            return this.userService.deleteUser(user)
+            return this.userService.delete(user)
         }catch (error) {
             return error
         }
