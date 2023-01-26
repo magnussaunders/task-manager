@@ -1,10 +1,9 @@
-import {Column, Entity, ObjectID, ObjectIdColumn} from "typeorm";
-import {Activity} from "./interfaces/activity.interface";
+import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 
 @Entity()
 export class Task {
-    @ObjectIdColumn()
-    _id: ObjectID
+    @PrimaryGeneratedColumn()
+    _id: string
 
     @Column()
     oid: string
@@ -27,7 +26,12 @@ export class Task {
     @Column()
     dueDate: Date
 
-    @Column()
+    @Column(
+        'text',
+        {
+            array: true
+        }
+    )
     assignees: string[]
 
     @Column()
@@ -38,7 +42,4 @@ export class Task {
 
     @Column()
     priority: string
-
-    @Column()
-    activities: Activity[]
 }
