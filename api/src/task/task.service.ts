@@ -21,7 +21,9 @@ export class TaskService {
     }
 
     getTasksForUser(userId: string): Promise<Task[]> {
-        return this.taskRepository.findBy({assignees: ArrayContains([userId])})
+        return this.taskRepository.createQueryBuilder('tasksForUser')
+            .where({ assignees: ArrayContains([userId])})
+            .getMany()
     }
 
     getTasksForBoard(boardId: string): Promise<Task[]> {
