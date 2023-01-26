@@ -40,7 +40,7 @@ export class BoardController {
         return this.statusService.getStatusesForBoard(params.boardId)
     }
 
-    @Get(':boardId/priority')
+    @Get(':boardId/priorities')
     getPrioritiesForBoard(@Param() params): Promise<Priority[]> {
         return this.priorityService.getPrioritiesForBoard(params.boardId)
     }
