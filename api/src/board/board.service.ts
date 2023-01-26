@@ -1,11 +1,9 @@
 import {Injectable} from '@nestjs/common';
 import {InjectRepository} from "@nestjs/typeorm";
 import {ArrayContains, Repository} from "typeorm";
-import {Board} from "./entities/board.entity";
+import {Board} from "./board.entity";
 import {Factory} from "../common/enums/factory.enum";
 import {IdGenerator} from "../common/classes/id-generator.class";
-import {Category} from "../category/category.entity";
-import {Status} from "./entities/status.entity";
 import {Priority} from "./entities/priority.entity";
 
 @Injectable()
@@ -14,13 +12,7 @@ export class BoardService {
         @InjectRepository(Board)
         private boardRepository: Repository<Board>,
 
-        @InjectRepository(Category)
-        private categoryRepository: Repository<Category>,
-
-        @InjectRepository(Status)
-        private statusRepository: Repository<Status>,
-
-        @InjectRepository(Priority)
+         @InjectRepository(Priority)
         private priorityRepository: Repository<Priority>,
     ) {}
 
@@ -38,10 +30,6 @@ export class BoardService {
             .getMany()
     }
 
-    getStatusesForBoard(boardId: string): Promise<Status[]> {
-        return this.statusRepository.findBy({bid: boardId})
-    }
-
     getPrioritiesForBoard(boardId: string): Promise<Priority[]> {
         return this.priorityRepository.findBy({bid: boardId})
     }
@@ -49,12 +37,6 @@ export class BoardService {
     create(board: Board): Promise<Board> {
         board.oid = IdGenerator.generateId(Factory.Board)
         return this.boardRepository.save(board)
-    }
-
-    createStatusForBoard(boardId: string, status: Status): Promise<Status> {
-        status.bid = boardId
-        status.oid = IdGenerator.generateId(Factory.Status)
-        return this.statusRepository.save(status)
     }
 
     createPriorityForBoard(boardId: string, priority: Priority): Promise<Priority> {
@@ -68,11 +50,6 @@ export class BoardService {
         return this.boardRepository.findOneBy({oid: board.oid})
     }
 
-    async updateStatusForBoard(statusId: string,status: Status): Promise<Status> {
-        await this.statusRepository.update({oid: statusId}, status)
-        return this.statusRepository.findOneBy({oid: statusId})
-    }
-
     async updatePriorityForBoard(priorityId: string,priority: Priority): Promise<Priority> {
         await this.priorityRepository.update({oid: priorityId}, priority)
         return this.priorityRepository.findOneBy({oid: priorityId})
@@ -80,11 +57,6 @@ export class BoardService {
 
     async delete(board: Board): Promise<void> {
         await this.boardRepository.delete({oid: board.oid})
-        return
-    }
-
-    async deleteStatusForBoard(statusId: string): Promise<void> {
-        await this.statusRepository.delete({oid: statusId})
         return
     }
 

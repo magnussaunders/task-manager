@@ -4,7 +4,7 @@ import {User} from "./user.entity";
 import {Task} from "../task/task.entity";
 import {BoardService} from "../board/board.service";
 import {TaskService} from "../task/task.service";
-import {Board} from "../board/entities/board.entity";
+import {Board} from "../board/board.entity";
 
 @Controller('user')
 export class UserController {

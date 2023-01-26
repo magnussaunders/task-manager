@@ -1,19 +1,21 @@
 import {Body, Controller, Delete, Get, Param, Patch, Put} from '@nestjs/common';
 import {BoardService} from "./board.service";
-import {Board} from "./entities/board.entity";
+import {Board} from "./board.entity";
 import {TaskService} from "../task/task.service";
 import {Task} from "../task/task.entity";
 import {Category} from "../category/category.entity";
-import {Status} from "./entities/status.entity";
+import {Status} from "../status/status.entity";
 import {Priority} from "./entities/priority.entity";
 import {CategoryService} from "../category/category.service";
+import {StatusService} from "../status/status.service";
 
 @Controller('board')
 export class BoardController {
     constructor(
         private boardService: BoardService,
         private taskService: TaskService,
-        private categoryService: CategoryService
+        private categoryService: CategoryService,
+        private statusService: StatusService
     ) {}
 
     @Get()
@@ -31,24 +33,9 @@ export class BoardController {
         return this.categoryService.getCategoriesForBoard(params.boardId)
     }
 
-    @Get(':boardId/status')
+    @Get(':boardId/statuses')
     getStatusesForBoard(@Param() params): Promise<Status[]> {
-        return this.boardService.getStatusesForBoard(params.boardId)
-    }
-
-    @Put(':boardId/status')
-    createStatusForBoard(@Param() params, @Body() status): Promise<Status> {
-        return this.boardService.createStatusForBoard(params.boardId, status)
-    }
-
-    @Patch(':boardId/status/:statusId')
-    updateStatusForBoard(@Param() params, @Body() status): Promise<Status> {
-        return this.boardService.updateStatusForBoard(params.statusId, status)
-    }
-
-    @Delete(':boardId/status/:statusId')
-    deleteStatusForBoard(@Param() params): Promise<void> {
-        return this.boardService.deleteStatusForBoard(params.statusId)
+        return this.statusService.getStatusesForBoard(params.boardId)
     }
 
     @Get(':boardId/priority')
