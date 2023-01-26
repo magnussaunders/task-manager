@@ -1,6 +1,6 @@
 import {Body, Controller, Delete, Get, Param, Patch, Put} from '@nestjs/common';
 import {BoardService} from "./board.service";
-import {Board} from "./board.entity";
+import {Board} from "./entities/board.entity";
 import {TaskService} from "../task/task.service";
 import {Task} from "../task/task.entity";
 

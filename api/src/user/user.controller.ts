@@ -3,7 +3,6 @@ import {UserService} from "./user.service";
 import {User} from "./user.entity";
 import {Task} from "../task/task.entity";
 import {BoardService} from "../board/board.service";
-import {Board} from "../board/board.entity";
 import {TaskService} from "../task/task.service";
 
 @Controller('user')
@@ -32,10 +31,10 @@ export class UserController {
         }
     }
 
-    @Get(':userId/boards')
-    async getBoardListForUser(@Param() params): Promise<Board[]> {
-        return this.boardService.getBoardsForUser(params.userId)
-    }
+    // @Get(':userId/boards')
+    // async getBoardListForUser(@Param() params): Promise<Board[]> {
+    //     return this.boardService.getBoardsForUser(params.userId)
+    // }
 
     @Get(':userId/tasks')
     async getTasksForUser(@Param() params): Promise<Task[]> {
