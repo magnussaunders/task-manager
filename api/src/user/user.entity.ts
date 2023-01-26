@@ -9,13 +9,13 @@ export class User {
     oid: string
 
     @Column()
-    userFirstName: string
+    firstName: string
 
     @Column()
-    userLastName: string
+    lastName: string
 
     @Column()
-    userName: string
+    username: string
 
     @Column()
     passwordHash: string

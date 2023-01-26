@@ -9,6 +9,9 @@ export class Status {
     oid: string
 
     @Column()
+    bid: string
+
+    @Column()
     name: string
 
     @Column()

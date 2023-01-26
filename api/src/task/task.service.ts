@@ -25,7 +25,7 @@ export class TaskService {
     }
 
     getTasksForBoard(boardId: string): Promise<Task[]> {
-        return this.taskRepository.findBy({bid: ArrayContains([boardId])})
+        return this.taskRepository.findBy({bid: boardId})
     }
 
     async create(task: Task): Promise<Task> {
