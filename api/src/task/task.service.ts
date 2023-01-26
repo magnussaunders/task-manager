@@ -24,6 +24,10 @@ export class TaskService {
         return this.taskRepository.findBy({assignees: ArrayContains([userId])})
     }
 
+    getTasksForBoard(boardId: string): Promise<Task[]> {
+        return this.taskRepository.findBy({bid: ArrayContains([boardId])})
+    }
+
     async create(task: Task): Promise<Task> {
         task.oid = IdGenerator.generateId(Factory.Task)
         return this.taskRepository.save(task)
