@@ -1,17 +1,23 @@
 import {Body, Controller, Delete, Get, Param, Patch, Put} from '@nestjs/common';
 import {BoardService} from "./board.service";
-import {Board} from "./entities/board.entity";
+import {Board} from "./board.entity";
 import {TaskService} from "../task/task.service";
 import {Task} from "../task/task.entity";
-import {Category} from "./entities/category.entity";
-import {Status} from "./entities/status.entity";
-import {Priority} from "./entities/priority.entity";
+import {Category} from "../category/category.entity";
+import {Status} from "../status/status.entity";
+import {Priority} from "../priority/priority.entity";
+import {CategoryService} from "../category/category.service";
+import {StatusService} from "../status/status.service";
+import {PriorityService} from "../priority/priority.service";
 
 @Controller('board')
 export class BoardController {
     constructor(
         private boardService: BoardService,
-        private taskService: TaskService
+        private taskService: TaskService,
+        private categoryService: CategoryService,
+        private statusService: StatusService,
+        private priorityService: PriorityService
     ) {}
 
     @Get()
@@ -24,64 +30,19 @@ export class BoardController {
         return this.boardService.findById(params.boardId)
     }
 
-    @Get(':boardId/category')
+    @Get(':boardId/categories')
     getCategoriesForBoard(@Param() params): Promise<Category[]> {
-        return this.boardService.getCategoriesForBoard(params.boardId)
+        return this.categoryService.getCategoriesForBoard(params.boardId)
     }
 
-    @Put(':boardId/category')
-    createCategoryForBoard(@Param() params, @Body() category): Promise<Category> {
-        return this.boardService.createCategoryForBoard(params.boardId, category)
-    }
-
-    @Patch(':boardId/category/:categoryId')
-    updateCategoryForBoard(@Param() params, @Body() category): Promise<Category> {
-        return this.boardService.updateCategoryForBoard(params.categoryId, category)
-    }
-
-    @Delete(':boardId/category/:categoryId')
-    deleteCategoryForBoard(@Param() params): Promise<void> {
-        return this.boardService.deleteCategoryForBoard(params.categoryId)
-    }
-
-    @Get(':boardId/status')
+    @Get(':boardId/statuses')
     getStatusesForBoard(@Param() params): Promise<Status[]> {
-        return this.boardService.getStatusesForBoard(params.boardId)
+        return this.statusService.getStatusesForBoard(params.boardId)
     }
 
-    @Put(':boardId/status')
-    createStatusForBoard(@Param() params, @Body() status): Promise<Status> {
-        return this.boardService.createStatusForBoard(params.boardId, status)
-    }
-
-    @Patch(':boardId/status/:statusId')
-    updateStatusForBoard(@Param() params, @Body() status): Promise<Status> {
-        return this.boardService.updateStatusForBoard(params.statusId, status)
-    }
-
-    @Delete(':boardId/status/:statusId')
-    deleteStatusForBoard(@Param() params): Promise<void> {
-        return this.boardService.deleteStatusForBoard(params.statusId)
-    }
-
-    @Get(':boardId/priority')
+    @Get(':boardId/priorities')
     getPrioritiesForBoard(@Param() params): Promise<Priority[]> {
-        return this.boardService.getPrioritiesForBoard(params.boardId)
-    }
-
-    @Put(':boardId/priority')
-    createPriorityForBoard(@Param() params, @Body() priority): Promise<Priority> {
-        return this.boardService.createPriorityForBoard(params.boardId, priority)
-    }
-
-    @Patch(':boardId/priority/:priorityId')
-    updatePriorityForBoard(@Param() params, @Body() priority): Promise<Priority> {
-        return this.boardService.updatePriorityForBoard(params.priorityId, priority)
-    }
-
-    @Delete(':boardId/priority/:priorityId')
-    deletePriorityForBoard(@Param() params): Promise<void> {
-        return this.boardService.deletePriorityForBoard(params.priorityId)
+        return this.priorityService.getPrioritiesForBoard(params.boardId)
     }
 
     @Get(':boardId/tasks')

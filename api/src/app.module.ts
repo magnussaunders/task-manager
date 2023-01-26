@@ -3,14 +3,17 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import {TypeOrmModule} from "@nestjs/typeorm";
 import { BoardModule } from './board/board.module';
-import {Board} from "./board/entities/board.entity";
+import {Board} from "./board/board.entity";
 import { UserModule } from './user/user.module';
 import {User} from "./user/user.entity";
 import { TaskModule } from './task/task.module';
 import {Task} from "./task/task.entity";
-import {Category} from "./board/entities/category.entity";
-import {Priority} from "./board/entities/priority.entity";
-import {Status} from "./board/entities/status.entity";
+import {Category} from "./category/category.entity";
+import {Priority} from "./priority/priority.entity";
+import {Status} from "./status/status.entity";
+import { CategoryModule } from './category/category.module';
+import { StatusModule } from './status/status.module';
+import { PriorityModule } from './priority/priority.module';
 
 @Module({
   imports: [
@@ -26,7 +29,10 @@ import {Status} from "./board/entities/status.entity";
     }),
     BoardModule,
     UserModule,
-    TaskModule
+    TaskModule,
+    CategoryModule,
+    StatusModule,
+    PriorityModule
   ],
   controllers: [AppController],
   providers: [AppService],
