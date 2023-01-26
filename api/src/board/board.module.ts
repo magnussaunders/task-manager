@@ -6,9 +6,10 @@ import { BoardController } from './board.controller';
 import {TaskModule} from "../task/task.module";
 import {Category} from "../category/category.entity";
 import {Status} from "../status/status.entity";
-import {Priority} from "./entities/priority.entity";
+import {Priority} from "../priority/priority.entity";
 import {CategoryModule} from "../category/category.module";
 import {StatusModule} from "../status/status.module";
+import {PriorityModule} from "../priority/priority.module";
 
 
 @Module({
@@ -16,7 +17,8 @@ import {StatusModule} from "../status/status.module";
         TypeOrmModule.forFeature([Board, Category, Status, Priority]),
         TaskModule,
         CategoryModule,
-        StatusModule
+        StatusModule,
+        PriorityModule
     ],
     providers: [BoardService],
     controllers: [BoardController],

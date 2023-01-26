@@ -5,9 +5,10 @@ import {TaskService} from "../task/task.service";
 import {Task} from "../task/task.entity";
 import {Category} from "../category/category.entity";
 import {Status} from "../status/status.entity";
-import {Priority} from "./entities/priority.entity";
+import {Priority} from "../priority/priority.entity";
 import {CategoryService} from "../category/category.service";
 import {StatusService} from "../status/status.service";
+import {PriorityService} from "../priority/priority.service";
 
 @Controller('board')
 export class BoardController {
@@ -15,7 +16,8 @@ export class BoardController {
         private boardService: BoardService,
         private taskService: TaskService,
         private categoryService: CategoryService,
-        private statusService: StatusService
+        private statusService: StatusService,
+        private priorityService: PriorityService
     ) {}
 
     @Get()
@@ -40,22 +42,7 @@ export class BoardController {
 
     @Get(':boardId/priority')
     getPrioritiesForBoard(@Param() params): Promise<Priority[]> {
-        return this.boardService.getPrioritiesForBoard(params.boardId)
-    }
-
-    @Put(':boardId/priority')
-    createPriorityForBoard(@Param() params, @Body() priority): Promise<Priority> {
-        return this.boardService.createPriorityForBoard(params.boardId, priority)
-    }
-
-    @Patch(':boardId/priority/:priorityId')
-    updatePriorityForBoard(@Param() params, @Body() priority): Promise<Priority> {
-        return this.boardService.updatePriorityForBoard(params.priorityId, priority)
-    }
-
-    @Delete(':boardId/priority/:priorityId')
-    deletePriorityForBoard(@Param() params): Promise<void> {
-        return this.boardService.deletePriorityForBoard(params.priorityId)
+        return this.priorityService.getPrioritiesForBoard(params.boardId)
     }
 
     @Get(':boardId/tasks')

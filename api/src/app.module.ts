@@ -9,10 +9,11 @@ import {User} from "./user/user.entity";
 import { TaskModule } from './task/task.module';
 import {Task} from "./task/task.entity";
 import {Category} from "./category/category.entity";
-import {Priority} from "./board/entities/priority.entity";
+import {Priority} from "./priority/priority.entity";
 import {Status} from "./status/status.entity";
 import { CategoryModule } from './category/category.module';
 import { StatusModule } from './status/status.module';
+import { PriorityModule } from './priority/priority.module';
 
 @Module({
   imports: [
@@ -30,7 +31,8 @@ import { StatusModule } from './status/status.module';
     UserModule,
     TaskModule,
     CategoryModule,
-    StatusModule
+    StatusModule,
+    PriorityModule
   ],
   controllers: [AppController],
   providers: [AppService],
