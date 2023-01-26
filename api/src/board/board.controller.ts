@@ -3,15 +3,17 @@ import {BoardService} from "./board.service";
 import {Board} from "./entities/board.entity";
 import {TaskService} from "../task/task.service";
 import {Task} from "../task/task.entity";
-import {Category} from "./entities/category.entity";
+import {Category} from "../category/category.entity";
 import {Status} from "./entities/status.entity";
 import {Priority} from "./entities/priority.entity";
+import {CategoryService} from "../category/category.service";
 
 @Controller('board')
 export class BoardController {
     constructor(
         private boardService: BoardService,
-        private taskService: TaskService
+        private taskService: TaskService,
+        private categoryService: CategoryService
     ) {}
 
     @Get()
@@ -24,24 +26,9 @@ export class BoardController {
         return this.boardService.findById(params.boardId)
     }
 
-    @Get(':boardId/category')
+    @Get(':boardId/categories')
     getCategoriesForBoard(@Param() params): Promise<Category[]> {
-        return this.boardService.getCategoriesForBoard(params.boardId)
-    }
-
-    @Put(':boardId/category')
-    createCategoryForBoard(@Param() params, @Body() category): Promise<Category> {
-        return this.boardService.createCategoryForBoard(params.boardId, category)
-    }
-
-    @Patch(':boardId/category/:categoryId')
-    updateCategoryForBoard(@Param() params, @Body() category): Promise<Category> {
-        return this.boardService.updateCategoryForBoard(params.categoryId, category)
-    }
-
-    @Delete(':boardId/category/:categoryId')
-    deleteCategoryForBoard(@Param() params): Promise<void> {
-        return this.boardService.deleteCategoryForBoard(params.categoryId)
+        return this.categoryService.getCategoriesForBoard(params.boardId)
     }
 
     @Get(':boardId/status')

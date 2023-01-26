@@ -4,7 +4,7 @@ import {ArrayContains, Repository} from "typeorm";
 import {Board} from "./entities/board.entity";
 import {Factory} from "../common/enums/factory.enum";
 import {IdGenerator} from "../common/classes/id-generator.class";
-import {Category} from "./entities/category.entity";
+import {Category} from "../category/category.entity";
 import {Status} from "./entities/status.entity";
 import {Priority} from "./entities/priority.entity";
 
@@ -38,10 +38,6 @@ export class BoardService {
             .getMany()
     }
 
-    getCategoriesForBoard(boardId: string): Promise<Category[]> {
-        return this.categoryRepository.findBy({bid: boardId})
-    }
-
     getStatusesForBoard(boardId: string): Promise<Status[]> {
         return this.statusRepository.findBy({bid: boardId})
     }
@@ -53,12 +49,6 @@ export class BoardService {
     create(board: Board): Promise<Board> {
         board.oid = IdGenerator.generateId(Factory.Board)
         return this.boardRepository.save(board)
-    }
-
-    createCategoryForBoard(boardId: string, category: Category): Promise<Category> {
-        category.bid = boardId
-        category.oid = IdGenerator.generateId(Factory.Category)
-        return this.categoryRepository.save(category)
     }
 
     createStatusForBoard(boardId: string, status: Status): Promise<Status> {
@@ -78,11 +68,6 @@ export class BoardService {
         return this.boardRepository.findOneBy({oid: board.oid})
     }
 
-    async updateCategoryForBoard(categoryId: string,category: Category): Promise<Category> {
-        await this.categoryRepository.update({oid: categoryId}, category)
-        return this.categoryRepository.findOneBy({oid: categoryId})
-    }
-
     async updateStatusForBoard(statusId: string,status: Status): Promise<Status> {
         await this.statusRepository.update({oid: statusId}, status)
         return this.statusRepository.findOneBy({oid: statusId})
@@ -95,11 +80,6 @@ export class BoardService {
 
     async delete(board: Board): Promise<void> {
         await this.boardRepository.delete({oid: board.oid})
-        return
-    }
-
-    async deleteCategoryForBoard(categoryId: string): Promise<void> {
-        await this.categoryRepository.delete({oid: categoryId})
         return
     }
 

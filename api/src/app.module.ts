@@ -8,9 +8,10 @@ import { UserModule } from './user/user.module';
 import {User} from "./user/user.entity";
 import { TaskModule } from './task/task.module';
 import {Task} from "./task/task.entity";
-import {Category} from "./board/entities/category.entity";
+import {Category} from "./category/category.entity";
 import {Priority} from "./board/entities/priority.entity";
 import {Status} from "./board/entities/status.entity";
+import { CategoryModule } from './category/category.module';
 
 @Module({
   imports: [
@@ -26,7 +27,8 @@ import {Status} from "./board/entities/status.entity";
     }),
     BoardModule,
     UserModule,
-    TaskModule
+    TaskModule,
+    CategoryModule
   ],
   controllers: [AppController],
   providers: [AppService],
