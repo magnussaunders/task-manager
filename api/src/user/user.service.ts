@@ -20,6 +20,10 @@ export class UserService {
         return this.userRepository.findOneBy({oid: userId})
     }
 
+    findByUsername(username: string): Promise<User> {
+        return this.userRepository.findOneBy({username: username})
+    }
+
     async create(user: User): Promise<User> {
         user.oid = IdGenerator.generateId(Factory.User)
         return this.userRepository.save(user)
