@@ -9,6 +9,7 @@ import {TaskModule} from "../task/task.module";
 @Module({
     imports:[TypeOrmModule.forFeature([User]), BoardModule, TaskModule],
     providers: [UserService],
-    controllers: [UserController]
+    controllers: [UserController],
+    exports: [UserService]
 })
 export class UserModule { }
