@@ -14,6 +14,10 @@ import {Status} from "./status/status.entity";
 import { CategoryModule } from './category/category.module';
 import { StatusModule } from './status/status.module';
 import { PriorityModule } from './priority/priority.module';
+import { AuthModule } from './auth/auth.module';
+import { ServiceModule } from './service/service.module';
+import {APP_GUARD} from "@nestjs/core";
+import {JwtAuthGuard} from "./auth/guards";
 
 @Module({
   imports: [
@@ -32,9 +36,17 @@ import { PriorityModule } from './priority/priority.module';
     TaskModule,
     CategoryModule,
     StatusModule,
-    PriorityModule
+    PriorityModule,
+    AuthModule,
+    ServiceModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+      AppService,
+    {
+        provide: APP_GUARD,
+        useClass: JwtAuthGuard
+    }
+  ],
 })
 export class AppModule {}
